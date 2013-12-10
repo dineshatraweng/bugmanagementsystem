@@ -18,6 +18,8 @@
     </tr>
   </thead>
   <tbody>
+    <%#= binding.pry%>
+  <% if current_user.designation==="Admin" %>
     <% @bugs.each do |bug| %>
       <tr>
         <td><%= link_to bug.id, bug_path(bug) %></td>
@@ -31,8 +33,15 @@
           <%end%>    
         </td>
         <td><%=l bug.created_at %></td>
-        <td><%= "Not yet"%>         
-        <td>
+        <%#= binding.pry%>
+        <%@user=User.find(bug.assign.user_id) rescue nil%>
+        <% if @user %>
+          <td><%=@user.fname%>&nbsp;<%=@user.lname%>         
+          <td>
+        <%else%>  
+          <td><%= "Not yet"%>         
+          <td>
+        <%end%>  
           <%=link_to t('AssignTo', :default => t("helpers.links.AssignTo")),
                       bug_path(bug), :class => 'btn btn-mini'%>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
@@ -45,9 +54,42 @@
         </td>
       </tr>
     <% end %>
+  <%else%>  
+    <% @assign.each do |assign| %>
+    <%bug=Bug.find(assign.bug_id)%>
+      <tr>
+        <td><%= link_to bug.id, bug_path(bug) %></td>
+        <td><%= bug.name %></td>
+        <td><%= bug.description %></td>
+        <td>
+          <%if bug.resolve%>
+            <%="Yes"%>
+          <%else%>
+            <%="No"%>
+          <%end%>    
+        </td>
+        <td><%=l bug.created_at %></td>
+        <%#= binding.pry%>
+        <%@user=User.find(bug.assign.user_id) rescue nil%>
+        <% if @user %>
+          <td><%=@user.fname%>&nbsp;<%=@user.lname%>         
+          <td>
+        <%else%>  
+          <td><%= "Not yet"%>         
+          <td>
+        <%end%>  
+          <%=link_to t('AssignTo', :default => t("helpers.links.AssignTo")),
+                      bug_path(bug), :class => 'btn btn-mini'%>
+          
+        </td>
+      </tr>
+    <%end%> 
+  <%end%> 
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
+<% if current_user.designation==="Admin" %>
+  <%= link_to t('.new', :default => t("helpers.links.new")),
             new_bug_path,
             :class => 'btn btn-primary' %>
+<%end%>            

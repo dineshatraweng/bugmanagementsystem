@@ -18,6 +18,10 @@
   <div><%= f.label :password_confirmation %><br />
   <%= f.password_field :password_confirmation %></div>
 
+  <div><%= "Designation" %><br/><br/> 
+       <%= f.select(:designation, options_for_select([["Admin","Admin"],["Employee","Employee"]]))  %>
+  </div>
+<br/><br/> 
   <div><%= f.submit "Sign up" %></div>
 <% end %>
 

@@ -20,7 +20,20 @@ class BugsController < ApplicationController
 
 
   def index
-    @bugs = Bug.all
+    if current_user.designation==="Admin"     
+      @bugs = Bug.where(:user_id=>current_user)
+    else
+      #binding.pry
+      @assign=Assign.where(:user_id=>current_user)
+      #  if !@assign.empty?
+      #    @assign.each do |a| 
+      #     @bugs=a.bug  
+      #    end  
+      #  else
+      #   @bugs = []#= Bug.where(:user_id=>current_user)
+
+      # end
+    end  
 
     respond_to do |format|
       format.html # index.html.erb

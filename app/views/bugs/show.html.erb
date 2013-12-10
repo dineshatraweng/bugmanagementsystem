@@ -13,8 +13,9 @@
   <dt><strong><%= model_class.human_attribute_name(:resolve) %>:</strong></dt>
   <dd><%= @bug.resolve %></dd>
   <dt><strong><%= model_class.human_attribute_name("Assign TO") %>:</strong></dt>
-  <dd><%= select("user", "user_id", User.all.collect {|p| [ p.fname, p.id ] }, { include_blank: true })  %></dd>
- 
+  <dd><%= select("user", "user_id", User.all.collect {|p| [ p.fname, p.id ] })  %></dd>
+  <dd id="errorMsg" class="errorMSGforcntno" style="color:red;"></dd>
+
 
 </dl>
 
@@ -44,10 +45,11 @@
              "bug":  <%=@bug.id%>}; 
   $.ajax({ 
   url: '/assignbug/assignto', 
-  type: 'get',
+  type: 'post',
   data: data,
   success: function(data,event,xhr) {        
-  window.location.href = '<%=@location%>';
+  //window.location.href = '<%#=@location%>';
+  $(".errorMSGforcntno").html('Bug successfully Assigned.');
   }
   });
   }); 
