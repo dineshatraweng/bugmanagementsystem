@@ -13,7 +13,8 @@
   <dt><strong><%= model_class.human_attribute_name(:resolve) %>:</strong></dt>
   <dd><%= @bug.resolve %></dd>
   <dt><strong><%= model_class.human_attribute_name("Assign TO") %>:</strong></dt>
-  <dd><%= select("user", "user_id", User.all.collect {|p| [ p.fname, p.id ] })  %></dd>
+  <%@user=User.where(:designation=>"Employee")%>
+  <dd><%= select("user_id", "user", @user.collect {|p| [ p.fname, p.id ] })  %></dd>
   <dd id="errorMsg" class="errorMSGforcntno" style="color:red;"></dd>
 
 
@@ -34,14 +35,14 @@
 
 <script type="text/javascript">
 
-  $('#user_user_id').change(function(){
+  $('#user_id_user').change(function(){
 
     // var data={
     //   "data": imgNum,
     //   "exp":<%=@experience.id rescue 0%>
     // }
 
-  var data ={"user":  $("#user_user_id").val(),
+  var data ={"user":  $("#user_id_user").val(),
              "bug":  <%=@bug.id%>}; 
   $.ajax({ 
   url: '/assignbug/assignto', 
