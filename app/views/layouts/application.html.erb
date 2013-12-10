@@ -7,8 +7,23 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+
+<% flash.each do |name, msg| %>
+<% if msg.is_a?(String) %>
+<div id="flash-notices">
+<div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+<div class="content">
+<a class="close" data-dismiss="alert" id='dismiss'>&#215;</a>
+<%= msg %>
+</div>
+</div>
+</div>
+<% end %>
+<% end %>
+
+
+	<!-- <p class="notice"><%#= notice %></p> -->
+  <!-- <p class="alert"><%#= alert %></p> -->
 
 
   
