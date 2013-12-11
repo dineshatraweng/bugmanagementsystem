@@ -14,7 +14,8 @@
   <dd><%= @bug.resolve %></dd>
   <dt><strong><%= model_class.human_attribute_name("Assign TO") %>:</strong></dt>
   <%@user=User.where(:designation=>"Employee")%>
-  <dd><%= select("user_id", "user", @user.collect {|p| [ p.fname, p.id ] })  %></dd>
+  <dd><%= select("user_id", "user", @user.collect {|p| [ p.fname, p.id ] },:prompt=>'Looking for')  %></dd>
+  <%#= select_tag(:option, options_for_select([['All', 1], ['Co', 2], ['Bought', 3], ['View', 4], ['Top API', 5]], selected: :option )) %>
   <dd id="errorMsg" class="errorMSGforcntno" style="color:red;"></dd>
 
 
