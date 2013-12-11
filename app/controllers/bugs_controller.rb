@@ -21,7 +21,8 @@ class BugsController < ApplicationController
 
   def index
     if current_user.designation==="Admin"     
-      @bugs = Bug.where(:user_id=>current_user)
+      @bugs = Bug.where(:user_id=>current_user).paginate(:page=>params[:page], :per_page => 4)
+      #@posts = Post.paginate(:page => params[:page])
     else
       #binding.pry
       @assign=Assign.where(:user_id=>current_user)

@@ -60,16 +60,20 @@
         <%else%>  
           <td><%= "Not yet"%>         
           <td>
-        <%end%>  
+        <%end%>
+        <div class="btn-group" data-toggle="buttons-radio">  
           <%=link_to t('AssignTo', :default => t("helpers.links.AssignTo")),
                       bug_path(bug), :class => 'btn btn-mini'%>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+          <%= link_to t('.edit ', :default => t("helpers.links.edit")),
                       edit_bug_path(bug), :class => 'btn btn-mini' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       bug_path(bug),
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-mini btn-danger' %>
+        </div>              
+
+
         </td>
       </tr>
     <% end %>
@@ -111,4 +115,7 @@
   <%= link_to t('.new', :default => t("helpers.links.new")),
             new_bug_path,
             :class => 'btn btn-primary' %>
-<%end%>            
+<%end%>  
+
+<%= will_paginate @bugs, renderer: BootstrapPagination::Rails %>
+

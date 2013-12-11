@@ -8,6 +8,9 @@ gem 'rails', '3.2.13'
 gem 'mysql2'
 gem 'pry'
 gem 'devise'
+#gem 'will_paginate', '~> 3.0'
+#gem 'bootstrap-will_paginate'
+gem 'will_paginate-bootstrap', '0.2.5'
 
 
 # Gems used only for assets and not required
